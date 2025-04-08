@@ -1,0 +1,3 @@
+com\example\notifications\model\Notification.class
+com\example\notifications\controller\NotificationController.class
+com\example\notifications\NotificationsApplication.class
