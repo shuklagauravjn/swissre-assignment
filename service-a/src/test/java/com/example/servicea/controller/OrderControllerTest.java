@@ -1,5 +1,6 @@
 package com.example.servicea.controller;
 
+import com.example.servicea.config.AppConfig;
 import com.example.servicea.model.Order;
 import com.example.servicea.service.OrderService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,6 +9,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -16,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @WebMvcTest(OrderController.class)
+@Import(AppConfig.class) // Include the AppConfig class
 public class OrderControllerTest {
 
     @Autowired
@@ -42,6 +45,6 @@ public class OrderControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(order)))
                 .andExpect(status().isCreated())
-                .andExpect(content().string("Order has been created"));
+                .andExpect(content().string("Order has been created and service-b notified"));
     }
 }
